@@ -9,7 +9,7 @@ class SequenceDataset(Dataset):
         f = open(txt_path, encoding="utf-8")
         self.seq_length = seq_length
         self.corpus = "".join(f.readlines()).lower()
-        self.vocab = set(self.corpus)
+        self.vocab = sorted(list(set(self.corpus)))
         self.vocab_to_idx = {i: idx for (idx, i) in enumerate(self.vocab)}
         self.idx_to_vocab = {v: k for k, v in self.vocab_to_idx.items()}
         self.corpus_encoded = torch.zeros(len(self.corpus), len(self.vocab))
